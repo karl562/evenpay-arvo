@@ -13,6 +13,9 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -22,6 +25,14 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+        },
+        evenpay: {
+          primary: "hsl(var(--evenpay-primary))",
+          dark: "hsl(var(--evenpay-dark))",
+          surface: "hsl(var(--evenpay-surface))",
+          border: "hsl(var(--evenpay-border))",
+          text: "hsl(var(--evenpay-text))",
+          muted: "hsl(var(--evenpay-text-muted))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",

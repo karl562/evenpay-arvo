@@ -1,0 +1,196 @@
+import { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Question, SurveyResponse } from '@/types/survey';
+import { cn } from '@/lib/utils';
+
+interface QuestionCardProps {
+  question: Question;
+  value?: string | string[];
+  onAnswer: (response: SurveyResponse) => void;
+  onNext: () => void;
+  onPrevious: () => void;
+  canGoNext: boolean;
+  canGoPrevious: boolean;
+  isLast: boolean;
+}
+
+export const QuestionCard = ({
+  question,
+  value,
+  onAnswer,
+  onNext,
+  onPrevious,
+  canGoNext,
+  canGoPrevious,
+  isLast
+}: QuestionCardProps) => {
+  const [currentValue, setCurrentValue] = useState<string | string[]>(
+    value || (question.type === 'multiselect' ? [] : '')
+  );
+  const [error, setError] = useState<string>('');
+
+  useEffect(() => {
+    setCurrentValue(value || (question.type === 'multiselect' ? [] : ''));
+    setError('');
+  }, [question.id, value]);
+
+  const handleValueChange = (newValue: string | string[]) => {
+    setCurrentValue(newValue);
+    setError('');
+    onAnswer({
+      questionId: question.id,
+      value: newValue
+    });
+  };
+
+  const handleNext = () => {
+    if (question.required) {
+      const isEmpty = question.type === 'multiselect' 
+        ? (currentValue as string[]).length === 0
+        : !currentValue || (currentValue as string).trim() === '';
+      
+      if (isEmpty) {
+        setError('Tämä kenttä on pakollinen');
+        return;
+      }
+    }
+    onNext();
+  };
+
+  const renderInput = () => {
+    switch (question.type) {
+      case 'radio':
+        return (
+          <div className="space-y-3">
+            {question.options?.map((option, index) => (
+              <label
+                key={index}
+                className={cn(
+                  "flex items-center p-4 rounded-lg border cursor-pointer transition-all",
+                  "border-border hover:border-primary/50 hover:bg-accent/20",
+                  currentValue === option && "border-primary bg-primary/10"
+                )}
+              >
+                <input
+                  type="radio"
+                  name={question.id}
+                  value={option}
+                  checked={currentValue === option}
+                  onChange={(e) => handleValueChange(e.target.value)}
+                  className="sr-only"
+                />
+                <div className={cn(
+                  "w-4 h-4 rounded-full border-2 mr-3 transition-all",
+                  currentValue === option 
+                    ? "border-primary bg-primary" 
+                    : "border-muted-foreground"
+                )}>
+                  {currentValue === option && (
+                    <div className="w-full h-full rounded-full bg-primary-foreground scale-50" />
+                  )}
+                </div>
+                <span className="text-foreground">{option}</span>
+              </label>
+            ))}
+          </div>
+        );
+      
+      case 'multiselect':
+        return (
+          <div className="space-y-3">
+            {question.options?.map((option, index) => (
+              <label
+                key={index}
+                className={cn(
+                  "flex items-center p-4 rounded-lg border cursor-pointer transition-all",
+                  "border-border hover:border-primary/50 hover:bg-accent/20",
+                  (currentValue as string[]).includes(option) && "border-primary bg-primary/10"
+                )}
+              >
+                <Checkbox
+                  checked={(currentValue as string[]).includes(option)}
+                  onCheckedChange={(checked) => {
+                    const newValue = checked
+                      ? [...(currentValue as string[]), option]
+                      : (currentValue as string[]).filter(v => v !== option);
+                    handleValueChange(newValue);
+                  }}
+                  className="mr-3"
+                />
+                <span className="text-foreground">{option}</span>
+              </label>
+            ))}
+          </div>
+        );
+      
+      case 'text':
+        return question.question.includes('Kuvaile') || question.question.includes('Mitkä') ? (
+          <Textarea
+            value={currentValue as string}
+            onChange={(e) => handleValueChange(e.target.value)}
+            placeholder="Kirjoita vastauksesi tähän..."
+            className="evenpay-input min-h-[120px] resize-none"
+            rows={4}
+          />
+        ) : (
+          <Input
+            type="text"
+            value={currentValue as string}
+            onChange={(e) => handleValueChange(e.target.value)}
+            placeholder="Kirjoita vastauksesi tähän..."
+            className="evenpay-input"
+          />
+        );
+      
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="evenpay-card max-w-2xl mx-auto">
+      <div className="space-y-6">
+        {question.subcategory && (
+          <div className="text-sm text-muted-foreground font-medium">
+            {question.category} → {question.subcategory}
+          </div>
+        )}
+        
+        <div>
+          <h2 className="text-lg font-medium text-foreground mb-4 leading-relaxed">
+            {question.question}
+            {question.required && <span className="text-destructive ml-1">*</span>}
+          </h2>
+          
+          {renderInput()}
+          
+          {error && (
+            <p className="text-destructive text-sm mt-2">{error}</p>
+          )}
+        </div>
+
+        <div className="flex justify-between pt-6">
+          <Button
+            variant="outline"
+            onClick={onPrevious}
+            disabled={!canGoPrevious}
+            className="px-8"
+          >
+            Edellinen
+          </Button>
+          
+          <Button
+            onClick={handleNext}
+            disabled={!canGoNext && question.required && !currentValue}
+            className="evenpay-button-primary px-8"
+          >
+            {isLast ? 'Valmis' : 'Seuraava'}
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};

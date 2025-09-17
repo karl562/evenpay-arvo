@@ -1,14 +1,17 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { Survey } from '@/components/survey/Survey';
+import { UserInfo } from '@/types/survey';
+
+// Mock user data from token - in real app this would be parsed from URL token
+const mockUserInfo: UserInfo = {
+  email: 'john.doe@evenpay.fi',
+  organization: 'Evenpay Oy',
+  position: 'Chief Executive Officer',
+  daysLeft: 14,
+  customMessage: 'Hei! Tämä kysely auttaa meitä arvioimaan roolisi vaativuutta ja varmistamaan, että kompensaatiosi on oikeudenmukainen. Vastaukset käsitellään luottamuksellisesti ja auttavat kehittämään organisaatiomme palkitsemisjärjestelmää. Kiitos ajastasi!'
+};
 
 const Index = () => {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
-  );
+  return <Survey userInfo={mockUserInfo} />;
 };
 
 export default Index;
