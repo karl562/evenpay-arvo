@@ -1,8 +1,8 @@
-import { EvaluationResult } from '@/types/survey';
+import { EvaluationResult, SurveyResponse, Question } from '@/types/survey';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
-import { TrendingUp, Award, AlertCircle, CheckCircle } from 'lucide-react';
+import { TrendingUp, Award, AlertCircle, CheckCircle, FileText } from 'lucide-react';
 
 interface EvaluationResultsProps {
   result: EvaluationResult;
@@ -11,9 +11,11 @@ interface EvaluationResultsProps {
     organization: string;
     position: string;
   };
+  responses: SurveyResponse[];
+  questions: Question[];
 }
 
-export const EvaluationResults = ({ result, userInfo }: EvaluationResultsProps) => {
+export const EvaluationResults = ({ result, userInfo, responses, questions }: EvaluationResultsProps) => {
   const getICLevelColor = (level: string) => {
     const colors = {
       'IC1': 'bg-blue-500',
@@ -94,26 +96,38 @@ export const EvaluationResults = ({ result, userInfo }: EvaluationResultsProps) 
           })}
         </div>
 
-        {/* Recommendations */}
+        {/* Answers Summary */}
         <Card className="evenpay-card border-0">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Award className="w-5 h-5 text-primary" />
-              Kehityssuositukset
+              <FileText className="w-5 h-5 text-primary" />
+              Vastauksesi
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-3">
-              {result.recommendations.map((recommendation, index) => (
-                <div key={index} className="flex items-start gap-3">
-                  <div className="w-6 h-6 bg-primary/20 text-primary rounded-full flex items-center justify-center text-xs font-semibold mt-0.5">
-                    {index + 1}
+            <div className="space-y-4">
+              {responses.map((response) => {
+                const question = questions.find(q => q.id === response.questionId);
+                if (!question) return null;
+                
+                const displayValue = Array.isArray(response.value) 
+                  ? response.value.join(', ')
+                  : response.value;
+                
+                return (
+                  <div key={response.questionId} className="border-b border-border/50 pb-3 last:border-b-0">
+                    <div className="text-sm text-muted-foreground mb-1">
+                      {question.category}
+                    </div>
+                    <div className="text-sm font-medium text-foreground mb-2">
+                      {question.question}
+                    </div>
+                    <div className="text-sm text-foreground bg-muted/20 rounded px-3 py-2">
+                      {displayValue}
+                    </div>
                   </div>
-                  <p className="text-foreground text-sm leading-relaxed">
-                    {recommendation}
-                  </p>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </CardContent>
         </Card>

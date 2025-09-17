@@ -257,9 +257,9 @@ export const surveyQuestions: Question[] = [
     id: '3.2.1b',
     category: 'Vastuut & vaikutus',
     subcategory: 'Budjetti- ja resurssivastuu',
-    type: 'text',
+    type: 'number',
     required: false,
-    question: 'Arvioi roolisi budjettivastuun arvo vuodessa:',
+    question: 'Arvioi roolisi budjettivastuun arvo vuodessa (euroina):',
     conditionalOn: {
       questionId: '3.2.1',
       value: 'Kyllä'
@@ -305,7 +305,7 @@ export const surveyQuestions: Question[] = [
     id: '3.3.1b',
     category: 'Vastuut & vaikutus',
     subcategory: 'Esihenkilötyö & johtaminen',
-    type: 'text',
+    type: 'number',
     required: false,
     question: 'Kuinka monta suoraa alaista sinulla on?',
     conditionalOn: {

@@ -69,9 +69,8 @@ export const Survey = ({ userInfo }: SurveyProps) => {
   };
 
   const getAnsweredQuestionsCount = () => {
-    return filteredQuestions.filter(question => 
-      responses.some(response => response.questionId === question.id)
-    ).length;
+    // Progress should be based on current question index, not answered questions
+    return currentQuestionIndex;
   };
 
   if (currentStep === 'intro') {
@@ -88,6 +87,8 @@ export const Survey = ({ userInfo }: SurveyProps) => {
       <EvaluationResults 
         result={evaluation} 
         userInfo={userInfo}
+        responses={responses}
+        questions={filteredQuestions}
       />
     );
   }

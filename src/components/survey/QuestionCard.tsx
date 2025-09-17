@@ -60,6 +60,13 @@ export const QuestionCard = ({
     onNext();
   };
 
+  const isFieldEmpty = () => {
+    if (question.type === 'multiselect') {
+      return (currentValue as string[]).length === 0;
+    }
+    return !currentValue || (currentValue as string).trim() === '';
+  };
+
   const renderInput = () => {
     switch (question.type) {
       case 'radio':
@@ -159,6 +166,18 @@ export const QuestionCard = ({
           />
         );
       
+      case 'number':
+        return (
+          <Input
+            type="number"
+            value={currentValue as string}
+            onChange={(e) => handleValueChange(e.target.value)}
+            placeholder="Syötä numero..."
+            className="evenpay-input"
+            min="0"
+          />
+        );
+      
       default:
         return null;
     }
@@ -167,9 +186,9 @@ export const QuestionCard = ({
   return (
     <div className="evenpay-card max-w-2xl mx-auto">
       <div className="space-y-6">
-        {question.subcategory && (
+        {question.category && (
           <div className="text-sm text-muted-foreground font-medium">
-            {question.category} → {question.subcategory}
+            {question.category}
           </div>
         )}
         
@@ -198,7 +217,7 @@ export const QuestionCard = ({
           
           <Button
             onClick={handleNext}
-            disabled={!canGoNext && question.required && !currentValue}
+            disabled={question.required && isFieldEmpty()}
             className="evenpay-button-primary px-8"
           >
             {isLast ? 'Valmis' : 'Seuraava'}

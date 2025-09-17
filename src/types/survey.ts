@@ -1,6 +1,6 @@
 export interface Question {
   id: string;
-  type: 'radio' | 'text' | 'checkbox' | 'multiselect';
+  type: 'radio' | 'text' | 'checkbox' | 'multiselect' | 'number';
   question: string;
   options?: string[];
   required: boolean;

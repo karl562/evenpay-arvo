@@ -20,12 +20,15 @@ export const SurveyIntro = ({ userInfo, onStart }: SurveyIntroProps) => {
 
         <div className="space-y-6 mb-8">
           <div className="bg-muted/30 rounded-lg p-6 space-y-4">
-            <div className="flex items-center justify-center gap-2 text-muted-foreground">
-              <Mail className="w-4 h-4" />
-              <span className="text-sm">{userInfo.email}</span>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
+              <div className="flex items-center gap-2">
+                <User className="w-4 h-4 text-primary" />
+                <div>
+                  <div className="text-xs text-muted-foreground">Nimi</div>
+                  <div className="text-sm font-medium">{userInfo.email.split('@')[0]}</div>
+                </div>
+              </div>
+              
               <div className="flex items-center gap-2">
                 <Building className="w-4 h-4 text-primary" />
                 <div>
