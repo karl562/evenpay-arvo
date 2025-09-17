@@ -110,15 +110,29 @@ export const QuestionCard = ({
                   (currentValue as string[]).includes(option) && "border-primary bg-primary/10"
                 )}
               >
-                <Checkbox
+                <div className={cn(
+                  "w-4 h-4 rounded border-2 mr-3 transition-all flex items-center justify-center",
+                  (currentValue as string[]).includes(option) 
+                    ? "border-primary bg-primary" 
+                    : "border-muted-foreground"
+                )}>
+                  {(currentValue as string[]).includes(option) && (
+                    <svg className="w-3 h-3 text-primary-foreground" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  )}
+                </div>
+                <input
+                  type="checkbox"
                   checked={(currentValue as string[]).includes(option)}
-                  onCheckedChange={(checked) => {
+                  onChange={(e) => {
+                    const checked = e.target.checked;
                     const newValue = checked
                       ? [...(currentValue as string[]), option]
                       : (currentValue as string[]).filter(v => v !== option);
                     handleValueChange(newValue);
                   }}
-                  className="mr-3"
+                  className="sr-only"
                 />
                 <span className="text-foreground">{option}</span>
               </label>

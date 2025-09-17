@@ -68,6 +68,12 @@ export const Survey = ({ userInfo }: SurveyProps) => {
     return response?.value;
   };
 
+  const getAnsweredQuestionsCount = () => {
+    return filteredQuestions.filter(question => 
+      responses.some(response => response.questionId === question.id)
+    ).length;
+  };
+
   if (currentStep === 'intro') {
     return <SurveyIntro userInfo={userInfo} onStart={handleStart} />;
   }
@@ -92,7 +98,8 @@ export const Survey = ({ userInfo }: SurveyProps) => {
   }
 
   const currentQuestion = filteredQuestions[currentQuestionIndex];
-  const progress = ((currentQuestionIndex + 1) / filteredQuestions.length) * 100;
+  const answeredCount = getAnsweredQuestionsCount();
+  const progress = filteredQuestions.length > 0 ? (answeredCount / filteredQuestions.length) * 100 : 0;
 
   return (
     <div className="min-h-screen bg-background py-8 px-4">
@@ -107,7 +114,7 @@ export const Survey = ({ userInfo }: SurveyProps) => {
           </div>
         </div>
         <ProgressBar 
-          current={currentQuestionIndex + 1} 
+          current={answeredCount} 
           total={filteredQuestions.length}
         />
       </div>
