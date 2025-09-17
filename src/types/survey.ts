@@ -6,6 +6,10 @@ export interface Question {
   required: boolean;
   category: string;
   subcategory?: string;
+  conditionalOn?: {
+    questionId: string;
+    value: string | string[];
+  };
 }
 
 export interface SurveyResponse {

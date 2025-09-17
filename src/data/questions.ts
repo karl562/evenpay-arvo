@@ -37,7 +37,11 @@ export const surveyQuestions: Question[] = [
     subcategory: 'Virallinen koulutus',
     type: 'text',
     required: false,
-    question: 'Jos kyllä, luettele tarvittavat lisenssit tai sertifikaatit:'
+    question: 'Jos kyllä, luettele tarvittavat lisenssit tai sertifikaatit:',
+    conditionalOn: {
+      questionId: '1.1.2',
+      value: 'Kyllä'
+    }
   },
   {
     id: '1.2.1',
@@ -101,7 +105,11 @@ export const surveyQuestions: Question[] = [
     subcategory: 'Jatkuva oppiminen',
     type: 'text',
     required: false,
-    question: 'Jos kyllä, tarkenna mitä:'
+    question: 'Jos kyllä, tarkenna mitä:',
+    conditionalOn: {
+      questionId: '1.3.2',
+      value: 'Kyllä'
+    }
   },
   {
     id: '1.3.3',
@@ -254,7 +262,11 @@ export const surveyQuestions: Question[] = [
     subcategory: 'Budjetti- ja resurssivastuu',
     type: 'text',
     required: false,
-    question: 'Jos kyllä, arvioi vuosittaisesti vaikutettavan arvon suuruus:'
+    question: 'Jos kyllä, arvioi vuosittaisesti vaikutettavan arvon suuruus:',
+    conditionalOn: {
+      questionId: '3.2.1',
+      value: 'Kyllä'
+    }
   },
   {
     id: '3.2.2',
@@ -274,7 +286,11 @@ export const surveyQuestions: Question[] = [
     subcategory: 'Budjetti- ja resurssivastuu',
     type: 'text',
     required: false,
-    question: 'Jos kyllä, mitä?'
+    question: 'Jos kyllä, mitä?',
+    conditionalOn: {
+      questionId: '3.2.2',
+      value: 'Kyllä'
+    }
   },
   {
     id: '3.3.1',
@@ -294,7 +310,11 @@ export const surveyQuestions: Question[] = [
     subcategory: 'Esihenkilötyö & johtaminen',
     type: 'text',
     required: false,
-    question: 'Jos kyllä, kuinka monta suoraa alaisuutta?'
+    question: 'Jos kyllä, kuinka monta suoraa alaisuutta?',
+    conditionalOn: {
+      questionId: '3.3.1',
+      value: 'Kyllä'
+    }
   },
   {
     id: '3.3.2',
@@ -346,7 +366,11 @@ export const surveyQuestions: Question[] = [
     subcategory: 'Työympäristön haasteet',
     type: 'text',
     required: false,
-    question: 'Jos muualla, missä?'
+    question: 'Jos muualla, missä?',
+    conditionalOn: {
+      questionId: '4.1.1',
+      value: 'Muualla'
+    }
   },
   {
     id: '4.1.2',
@@ -395,7 +419,11 @@ export const surveyQuestions: Question[] = [
     subcategory: 'Fyysinen & psyykkinen kuormitus',
     type: 'text',
     required: false,
-    question: 'Jos kyllä, kuvaile:'
+    question: 'Jos kyllä, kuvaile:',
+    conditionalOn: {
+      questionId: '4.2.2',
+      value: 'Kyllä'
+    }
   },
   {
     id: '4.2.3',
@@ -415,7 +443,11 @@ export const surveyQuestions: Question[] = [
     subcategory: 'Fyysinen & psyykkinen kuormitus',
     type: 'text',
     required: false,
-    question: 'Jos kyllä, kuvaile:'
+    question: 'Jos kyllä, kuvaile:',
+    conditionalOn: {
+      questionId: '4.2.3',
+      value: 'Kyllä'
+    }
   },
   {
     id: '4.3.1',

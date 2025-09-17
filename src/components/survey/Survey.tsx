@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { surveyQuestions } from '@/data/questions';
 import { SurveyResponse, UserInfo } from '@/types/survey';
 import { SurveyIntro } from './SurveyIntro';
@@ -7,6 +7,7 @@ import { ProgressBar } from './ProgressBar';
 import { ThankYou } from './ThankYou';
 import { EvaluationResults } from './EvaluationResults';
 import { calculateEvaluation } from '@/utils/scoring';
+import { getFilteredQuestions } from '@/utils/questionUtils';
 
 interface SurveyProps {
   userInfo: UserInfo;
@@ -18,23 +19,33 @@ export const Survey = ({ userInfo }: SurveyProps) => {
   const [currentStep, setCurrentStep] = useState<SurveyStep>('intro');
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [responses, setResponses] = useState<SurveyResponse[]>([]);
+  const [filteredQuestions, setFilteredQuestions] = useState(surveyQuestions);
 
+  // Update filtered questions when responses change
+  useEffect(() => {
+    const newFilteredQuestions = getFilteredQuestions(surveyQuestions, responses);
+    setFilteredQuestions(newFilteredQuestions);
+    
+    // If current question is no longer valid, find the nearest valid one
+    if (currentQuestionIndex >= newFilteredQuestions.length && newFilteredQuestions.length > 0) {
+      setCurrentQuestionIndex(newFilteredQuestions.length - 1);
+    }
+  }, [responses, currentQuestionIndex]);
+  
   const handleStart = () => {
     setCurrentStep('survey');
+    setCurrentQuestionIndex(0);
   };
 
   const handleAnswer = (response: SurveyResponse) => {
     setResponses(prev => {
-      const existing = prev.find(r => r.questionId === response.questionId);
-      if (existing) {
-        return prev.map(r => r.questionId === response.questionId ? response : r);
-      }
-      return [...prev, response];
+      const newResponses = prev.filter(r => r.questionId !== response.questionId);
+      return [...newResponses, response];
     });
   };
 
   const handleNext = () => {
-    if (currentQuestionIndex < surveyQuestions.length - 1) {
+    if (currentQuestionIndex < filteredQuestions.length - 1) {
       setCurrentQuestionIndex(prev => prev + 1);
     } else {
       setCurrentStep('thankyou');
@@ -52,7 +63,8 @@ export const Survey = ({ userInfo }: SurveyProps) => {
   };
 
   const getCurrentValue = () => {
-    const response = responses.find(r => r.questionId === surveyQuestions[currentQuestionIndex].id);
+    if (currentQuestionIndex >= filteredQuestions.length) return undefined;
+    const response = responses.find(r => r.questionId === filteredQuestions[currentQuestionIndex].id);
     return response?.value;
   };
 
@@ -74,8 +86,13 @@ export const Survey = ({ userInfo }: SurveyProps) => {
     );
   }
 
-  const currentQuestion = surveyQuestions[currentQuestionIndex];
-  const progress = ((currentQuestionIndex + 1) / surveyQuestions.length) * 100;
+  if (currentQuestionIndex >= filteredQuestions.length) {
+    setCurrentStep('thankyou');
+    return <ThankYou onViewResults={handleViewResults} />;
+  }
+
+  const currentQuestion = filteredQuestions[currentQuestionIndex];
+  const progress = ((currentQuestionIndex + 1) / filteredQuestions.length) * 100;
 
   return (
     <div className="min-h-screen bg-background py-8 px-4">
@@ -83,7 +100,7 @@ export const Survey = ({ userInfo }: SurveyProps) => {
       <div className="max-w-2xl mx-auto mb-8">
         <div className="flex items-center justify-between mb-4">
           <div className="text-sm text-muted-foreground">
-            Kysymys {currentQuestionIndex + 1} / {surveyQuestions.length}
+            Kysymys {currentQuestionIndex + 1} / {filteredQuestions.length}
           </div>
           <div className="text-sm text-muted-foreground">
             {Math.round(progress)}% valmis
@@ -91,7 +108,7 @@ export const Survey = ({ userInfo }: SurveyProps) => {
         </div>
         <ProgressBar 
           current={currentQuestionIndex + 1} 
-          total={surveyQuestions.length}
+          total={filteredQuestions.length}
         />
       </div>
 
@@ -104,7 +121,7 @@ export const Survey = ({ userInfo }: SurveyProps) => {
         onPrevious={handlePrevious}
         canGoNext={true}
         canGoPrevious={currentQuestionIndex > 0}
-        isLast={currentQuestionIndex === surveyQuestions.length - 1}
+        isLast={currentQuestionIndex === filteredQuestions.length - 1}
       />
     </div>
   );
