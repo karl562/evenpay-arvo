@@ -1,5 +1,4 @@
 import { Question } from '../types/survey';
-
 export const surveyQuestions: Question[] = [
   // 1. Tieto & taidot
   {
@@ -37,7 +36,7 @@ export const surveyQuestions: Question[] = [
     subcategory: 'Virallinen koulutus',
     type: 'text',
     required: false,
-    question: 'Jos kyllä, luettele tarvittavat lisenssit tai sertifikaatit:',
+    question: 'Luettele tarvittavat lisenssit ja/tai sertifikaatit:',
     conditionalOn: {
       questionId: '1.1.2',
       value: 'Kyllä'
@@ -105,7 +104,7 @@ export const surveyQuestions: Question[] = [
     subcategory: 'Jatkuva oppiminen',
     type: 'text',
     required: false,
-    question: 'Jos kyllä, tarkenna mitä:',
+    question: 'Tarkenna, mitä koulutusta tarjotaan tai vaaditaan?:',
     conditionalOn: {
       questionId: '1.3.2',
       value: 'Kyllä'
@@ -151,7 +150,6 @@ export const surveyQuestions: Question[] = [
     required: true,
     question: 'Mitkä tehtävät koet kaikkein merkityksellisimmiksi yhtiön kannalta?'
   },
-
   // 2. Henkinen & fyysinen kuormitus
   {
     id: '2.1.1',
@@ -224,7 +222,6 @@ export const surveyQuestions: Question[] = [
     required: true,
     question: 'Kuvaile roolissa esiintyviä stressaavia tilanteita:'
   },
-
   // 3. Vastuut & vaikutus
   {
     id: '3.1.1',
@@ -262,7 +259,7 @@ export const surveyQuestions: Question[] = [
     subcategory: 'Budjetti- ja resurssivastuu',
     type: 'text',
     required: false,
-    question: 'Jos kyllä, arvioi vuosittaisesti vaikutettavan arvon suuruus:',
+    question: 'Arvioi roolisi budjettivastuun arvo vuodessa:',
     conditionalOn: {
       questionId: '3.2.1',
       value: 'Kyllä'
@@ -286,7 +283,7 @@ export const surveyQuestions: Question[] = [
     subcategory: 'Budjetti- ja resurssivastuu',
     type: 'text',
     required: false,
-    question: 'Jos kyllä, mitä?',
+    question: 'Mitä materiaali-/tekniikkaresursseja tehtävässäsi hallinnoidaan?',
     conditionalOn: {
       questionId: '3.2.2',
       value: 'Kyllä'
@@ -310,7 +307,7 @@ export const surveyQuestions: Question[] = [
     subcategory: 'Esihenkilötyö & johtaminen',
     type: 'text',
     required: false,
-    question: 'Jos kyllä, kuinka monta suoraa alaisuutta?',
+    question: 'Kuinka monta suoraa alaista sinulla on?',
     conditionalOn: {
       questionId: '3.3.1',
       value: 'Kyllä'
@@ -344,7 +341,6 @@ export const surveyQuestions: Question[] = [
       'Kriittiset (turvallisuus-/henkeä uhkaavat seuraukset)'
     ]
   },
-
   // 4. Työolot
   {
     id: '4.1.1',
@@ -366,7 +362,7 @@ export const surveyQuestions: Question[] = [
     subcategory: 'Työympäristön haasteet',
     type: 'text',
     required: false,
-    question: 'Jos muualla, missä?',
+    question: 'Missä muualla?',
     conditionalOn: {
       questionId: '4.1.1',
       value: 'Muualla'
@@ -419,7 +415,7 @@ export const surveyQuestions: Question[] = [
     subcategory: 'Fyysinen & psyykkinen kuormitus',
     type: 'text',
     required: false,
-    question: 'Jos kyllä, kuvaile:',
+    question: 'Minkälaista fyysistä rasitusta?',
     conditionalOn: {
       questionId: '4.2.2',
       value: 'Kyllä'
@@ -443,7 +439,7 @@ export const surveyQuestions: Question[] = [
     subcategory: 'Fyysinen & psyykkinen kuormitus',
     type: 'text',
     required: false,
-    question: 'Jos kyllä, kuvaile:',
+    question: 'Minkälaista psyykkistä rasitusta?',
     conditionalOn: {
       questionId: '4.2.3',
       value: 'Kyllä'
@@ -515,7 +511,6 @@ export const surveyQuestions: Question[] = [
     required: true,
     question: 'Mitkä ovat tämän roolin suurimmat stressitekijät?'
   },
-
   // 5. Työn sujuvuus & esteet
   {
     id: '5.1.1',
