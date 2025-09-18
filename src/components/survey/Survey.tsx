@@ -102,7 +102,7 @@ export const Survey = ({ userInfo }: SurveyProps) => {
             <div className="text-sm text-muted-foreground">
               {Math.round(progress)}% valmis
             </div>
-            <img src="/evenpay-logo.svg" alt="Evenpay" className="h-3 opacity-60" />
+            <img src={`${import.meta.env.BASE_URL}evenpay-logo.svg`} alt="Evenpay" className="h-3 opacity-60" />
           </div>
         </div>
         <ProgressBar 

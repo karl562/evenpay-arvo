@@ -82,7 +82,7 @@ export const SurveyIntro = ({ userInfo, onStart }: SurveyIntroProps) => {
         </Button>
 
         <div className="mt-8 flex items-center justify-center gap-2">
-          <img src="/evenpay-logo.svg" alt="Evenpay" className="h-6" />
+          <img src={`${import.meta.env.BASE_URL}evenpay-logo.svg`} alt="Evenpay" className="h-6" />
         </div>
       </div>
     </div>

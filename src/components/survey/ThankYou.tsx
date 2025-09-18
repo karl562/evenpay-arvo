@@ -38,7 +38,7 @@ export const ThankYou = ({ onEmailCopy }: ThankYouProps) => {
 
         <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
           <span>Powered by</span>
-          <img src="/evenpay-logo.svg" alt="Evenpay" className="h-4" />
+          <img src={`${import.meta.env.BASE_URL}evenpay-logo.svg`} alt="Evenpay" className="h-4" />
         </div>
       </div>
     </div>
