@@ -152,7 +152,8 @@ export const QuestionCard = ({
                                  question.question.includes('Mitkä') ||
                                  question.question.includes('Onko osaamista, jota haluaisit kehittää') ||
                                  question.question.includes('Luettele tarvittavat lisenssit') ||
-                                 question.question.includes('Mitä osaamista/asiantuntijuutta työ vaatii');
+                                 question.question.includes('Mitä osaamista/asiantuntijuutta työ vaatii') ||
+                                 question.question.includes('Tarkenna, mitä koulutusta tarjotaan tai vaaditaan');
         
         return shouldUseTextarea ? (
           <Textarea
@@ -161,6 +162,7 @@ export const QuestionCard = ({
             placeholder="Kirjoita vastauksesi tähän..."
             className="evenpay-input min-h-[120px] resize-none"
             rows={4}
+            autoFocus
           />
         ) : (
           <Input
@@ -169,6 +171,7 @@ export const QuestionCard = ({
             onChange={(e) => handleValueChange(e.target.value)}
             placeholder="Kirjoita vastauksesi tähän..."
             className="evenpay-input"
+            autoFocus
           />
         );
       
@@ -181,6 +184,7 @@ export const QuestionCard = ({
             placeholder="Syötä numero..."
             className="evenpay-input"
             min="0"
+            autoFocus
           />
         );
       
