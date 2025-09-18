@@ -25,7 +25,7 @@ export const ThankYou = ({ onEmailCopy }: ThankYouProps) => {
         </div>
 
         {onEmailCopy && (
-          <div className="bg-muted/30 rounded-lg p-6 mb-8">
+          <div className="bg-muted/30 rounded-lg p-6 mb-8 text-center">
             <Button
               onClick={onEmailCopy}
               className="evenpay-button-primary flex items-center gap-2"

@@ -153,7 +153,9 @@ export const QuestionCard = ({
                                  question.question.includes('Onko osaamista, jota haluaisit kehittää') ||
                                  question.question.includes('Luettele tarvittavat lisenssit') ||
                                  question.question.includes('Mitä osaamista/asiantuntijuutta työ vaatii') ||
-                                 question.question.includes('Tarkenna, mitä koulutusta tarjotaan tai vaaditaan');
+                                 question.question.includes('Tarkenna, mitä koulutusta tarjotaan tai vaaditaan') ||
+                                 question.question.includes('Minkälaista fyysistä rasitusta') ||
+                                 question.question.includes('Onko työkaluja tai prosesseja, joita tulisi parantaa');
         
         return shouldUseTextarea ? (
           <Textarea
