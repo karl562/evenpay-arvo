@@ -71,13 +71,13 @@ export const QuestionCard = ({
     switch (question.type) {
       case 'radio':
         return (
-          <div className="space-y-3">
+          <div className="space-y-3" role="radiogroup" aria-labelledby={`question-${question.id}`}>
             {question.options?.map((option, index) => (
               <label
                 key={index}
                 className={cn(
                   "flex items-center p-4 rounded-lg border cursor-pointer transition-all",
-                  "border-border hover:border-primary/50 hover:bg-accent/20",
+                  "border-border hover:border-primary/50 hover:bg-accent/20 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20",
                   currentValue === option && "border-primary bg-primary/10"
                 )}
               >
@@ -88,6 +88,20 @@ export const QuestionCard = ({
                   checked={currentValue === option}
                   onChange={(e) => handleValueChange(e.target.value)}
                   className="sr-only"
+                  autoFocus={index === 0 && !currentValue}
+                  onKeyDown={(e) => {
+                    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+                      e.preventDefault();
+                      const nextIndex = (index + 1) % (question.options?.length || 1);
+                      const nextInput = e.currentTarget.parentElement?.parentElement?.children[nextIndex]?.querySelector('input') as HTMLInputElement;
+                      nextInput?.focus();
+                    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                      e.preventDefault();
+                      const prevIndex = index === 0 ? (question.options?.length || 1) - 1 : index - 1;
+                      const prevInput = e.currentTarget.parentElement?.parentElement?.children[prevIndex]?.querySelector('input') as HTMLInputElement;
+                      prevInput?.focus();
+                    }
+                  }}
                 />
                 <div className={cn(
                   "w-4 h-4 rounded-full border-2 mr-3 transition-all",
@@ -107,13 +121,13 @@ export const QuestionCard = ({
       
       case 'multiselect':
         return (
-          <div className="space-y-3">
+          <div className="space-y-3" role="group" aria-labelledby={`question-${question.id}`}>
             {question.options?.map((option, index) => (
               <label
                 key={index}
                 className={cn(
                   "flex items-center p-4 rounded-lg border cursor-pointer transition-all",
-                  "border-border hover:border-primary/50 hover:bg-accent/20",
+                  "border-border hover:border-primary/50 hover:bg-accent/20 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20",
                   (currentValue as string[]).includes(option) && "border-primary bg-primary/10"
                 )}
               >
@@ -140,6 +154,20 @@ export const QuestionCard = ({
                     handleValueChange(newValue);
                   }}
                   className="sr-only"
+                  autoFocus={index === 0 && (currentValue as string[]).length === 0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'ArrowDown') {
+                      e.preventDefault();
+                      const nextIndex = (index + 1) % (question.options?.length || 1);
+                      const nextInput = e.currentTarget.parentElement?.parentElement?.children[nextIndex]?.querySelector('input') as HTMLInputElement;
+                      nextInput?.focus();
+                    } else if (e.key === 'ArrowUp') {
+                      e.preventDefault();
+                      const prevIndex = index === 0 ? (question.options?.length || 1) - 1 : index - 1;
+                      const prevInput = e.currentTarget.parentElement?.parentElement?.children[prevIndex]?.querySelector('input') as HTMLInputElement;
+                      prevInput?.focus();
+                    }
+                  }}
                 />
                 <span className="text-foreground">{option}</span>
               </label>
@@ -205,7 +233,7 @@ export const QuestionCard = ({
         )}
         
         <div>
-          <h2 className="text-lg font-medium text-foreground mb-4 leading-relaxed">
+          <h2 id={`question-${question.id}`} className="text-lg font-medium text-foreground mb-4 leading-relaxed">
             {question.question}
             {question.required && <span className="text-destructive ml-1">*</span>}
           </h2>
@@ -223,6 +251,12 @@ export const QuestionCard = ({
             onClick={onPrevious}
             disabled={!canGoPrevious}
             className="px-8"
+            onKeyDown={(e) => {
+              if (e.key === 'ArrowRight' && !isFieldEmpty()) {
+                e.preventDefault();
+                handleNext();
+              }
+            }}
           >
             Edellinen
           </Button>
@@ -231,6 +265,12 @@ export const QuestionCard = ({
             onClick={handleNext}
             disabled={question.required && isFieldEmpty()}
             className="evenpay-button-primary px-8"
+            onKeyDown={(e) => {
+              if (e.key === 'ArrowLeft' && canGoPrevious) {
+                e.preventDefault();
+                onPrevious();
+              }
+            }}
           >
             {isLast ? 'Valmis' : 'Seuraava'}
           </Button>
