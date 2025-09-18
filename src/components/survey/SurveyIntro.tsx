@@ -25,7 +25,7 @@ export const SurveyIntro = ({ userInfo, onStart }: SurveyIntroProps) => {
                 <User className="w-4 h-4 text-primary" />
                 <div>
                   <div className="text-xs text-muted-foreground">Nimi</div>
-                  <div className="text-sm font-medium">{userInfo.email.split('@')[0]}</div>
+                  <div className="text-sm font-medium">John Doe</div>
                 </div>
               </div>
               
@@ -80,6 +80,10 @@ export const SurveyIntro = ({ userInfo, onStart }: SurveyIntroProps) => {
         >
           Aloita kysely
         </Button>
+
+        <div className="mt-8 flex items-center justify-center gap-2">
+          <img src="/evenpay-logo.svg" alt="Evenpay" className="h-6" />
+        </div>
       </div>
     </div>
   );

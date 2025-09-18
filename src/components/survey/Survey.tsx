@@ -98,8 +98,11 @@ export const Survey = ({ userInfo }: SurveyProps) => {
           <div className="text-sm text-muted-foreground">
             Kysymys {currentQuestionIndex + 1} / {filteredQuestions.length}
           </div>
-          <div className="text-sm text-muted-foreground">
-            {Math.round(progress)}% valmis
+          <div className="flex items-center gap-3">
+            <div className="text-sm text-muted-foreground">
+              {Math.round(progress)}% valmis
+            </div>
+            <img src="/evenpay-logo.svg" alt="Evenpay" className="h-3 opacity-60" />
           </div>
         </div>
         <ProgressBar 

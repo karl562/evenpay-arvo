@@ -36,8 +36,9 @@ export const ThankYou = ({ onEmailCopy }: ThankYouProps) => {
           </div>
         )}
 
-        <div className="text-xs text-muted-foreground">
-          Powered by <span className="font-semibold">Evenpay</span>
+        <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
+          <span>Powered by</span>
+          <img src="/evenpay-logo.svg" alt="Evenpay" className="h-4" />
         </div>
       </div>
     </div>

@@ -1,6 +1,15 @@
 import { Question } from '../types/survey';
 export const surveyQuestions: Question[] = [
-  // 1. Tieto & taidot
+  // 1. Työtehtävien kuvaus
+  {
+    id: '1.0.1',
+    category: 'Työtehtävien kuvaus',
+    subcategory: 'Työtehtävät ja sisältö',
+    type: 'text',
+    required: true,
+    question: 'Kuvaile työtehtävääsi ja työpäivän / työviikon sisältöä\n\n• Mitkä ovat tärkeimmät päivittäiset ja viikottaiset tehtäväsi?\n• Onko osaamista, jota haluaisit kehittää seuraavan vuoden aikana?\n• Mitkä tehtävät vievät eniten aikaasi?\n• Mitkä tehtävät koet kaikkein merkityksellisimmiksi yhtiön kannalta?'
+  },
+  // 2. Tieto & taidot
   {
     id: '1.1.1',
     category: 'Tieto & taidot',
