@@ -50,7 +50,7 @@ export const QuestionCard = ({
     if (question.required) {
       const isEmpty = question.type === 'multiselect' 
         ? (currentValue as string[]).length === 0
-        : !currentValue || (currentValue as string).trim() === '';
+        : !currentValue || (typeof currentValue === 'string' ? currentValue.trim() === '' : String(currentValue).trim() === '');
       
       if (isEmpty) {
         setError('Tämä kenttä on pakollinen');
@@ -64,7 +64,7 @@ export const QuestionCard = ({
     if (question.type === 'multiselect') {
       return (currentValue as string[]).length === 0;
     }
-    return !currentValue || (currentValue as string).trim() === '';
+    return !currentValue || (typeof currentValue === 'string' ? currentValue.trim() === '' : String(currentValue).trim() === '');
   };
 
   const renderInput = () => {
