@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -31,11 +31,31 @@ export const QuestionCard = ({
     value || (question.type === 'multiselect' ? [] : '')
   );
   const [error, setError] = useState<string>('');
+  const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null);
 
   useEffect(() => {
     setCurrentValue(value || (question.type === 'multiselect' ? [] : ''));
     setError('');
   }, [question.id, value]);
+
+  // Focus input when question changes
+  useEffect(() => {
+    const focusInput = () => {
+      if (question.type === 'text' || question.type === 'number') {
+        inputRef.current?.focus();
+      } else if (question.type === 'radio' || question.type === 'multiselect') {
+        // Focus first option for radio/checkbox questions
+        const firstInput = document.querySelector(`input[name="${question.id}"]`) as HTMLInputElement;
+        if (firstInput) {
+          firstInput.focus();
+        }
+      }
+    };
+
+    // Small delay to ensure DOM is updated
+    const timeoutId = setTimeout(focusInput, 100);
+    return () => clearTimeout(timeoutId);
+  }, [question.id, question.type]);
 
   const handleValueChange = (newValue: string | string[]) => {
     setCurrentValue(newValue);
@@ -88,7 +108,6 @@ export const QuestionCard = ({
                   checked={currentValue === option}
                   onChange={(e) => handleValueChange(e.target.value)}
                   className="sr-only"
-                  autoFocus={index === 0 && !currentValue}
                   onKeyDown={(e) => {
                     if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
                       e.preventDefault();
@@ -154,7 +173,6 @@ export const QuestionCard = ({
                     handleValueChange(newValue);
                   }}
                   className="sr-only"
-                  autoFocus={index === 0 && (currentValue as string[]).length === 0}
                   onKeyDown={(e) => {
                     if (e.key === 'ArrowDown') {
                       e.preventDefault();
@@ -187,34 +205,34 @@ export const QuestionCard = ({
         
         return shouldUseTextarea ? (
           <Textarea
+            ref={inputRef as React.RefObject<HTMLTextAreaElement>}
             value={currentValue as string}
             onChange={(e) => handleValueChange(e.target.value)}
             placeholder="Kirjoita vastauksesi tähän..."
             className="evenpay-input min-h-[120px] resize-none"
             rows={4}
-            autoFocus
           />
         ) : (
           <Input
+            ref={inputRef as React.RefObject<HTMLInputElement>}
             type="text"
             value={currentValue as string}
             onChange={(e) => handleValueChange(e.target.value)}
             placeholder="Kirjoita vastauksesi tähän..."
             className="evenpay-input"
-            autoFocus
           />
         );
       
       case 'number':
         return (
           <Input
+            ref={inputRef as React.RefObject<HTMLInputElement>}
             type="number"
             value={currentValue as string}
             onChange={(e) => handleValueChange(e.target.value)}
             placeholder="Syötä numero..."
             className="evenpay-input"
             min="0"
-            autoFocus
           />
         );
       
