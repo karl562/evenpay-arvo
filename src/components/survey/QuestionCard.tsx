@@ -148,7 +148,13 @@ export const QuestionCard = ({
         );
       
       case 'text':
-        return question.question.includes('Kuvaile') || question.question.includes('Mitkä') ? (
+        const shouldUseTextarea = question.question.includes('Kuvaile') || 
+                                 question.question.includes('Mitkä') ||
+                                 question.question.includes('Onko osaamista, jota haluaisit kehittää') ||
+                                 question.question.includes('Luettele tarvittavat lisenssit') ||
+                                 question.question.includes('Mitä osaamista/asiantuntijuutta työ vaatii');
+        
+        return shouldUseTextarea ? (
           <Textarea
             value={currentValue as string}
             onChange={(e) => handleValueChange(e.target.value)}

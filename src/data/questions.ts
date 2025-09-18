@@ -152,14 +152,6 @@ export const surveyQuestions: Question[] = [
     }
   },
   {
-    id: '1.3.3',
-    category: 'Tieto & taidot',
-    subcategory: 'Jatkuva oppiminen',
-    type: 'text',
-    required: false,
-    question: 'Onko osaamista, jota haluaisit kehittää seuraavan vuoden aikana?'
-  },
-  {
     id: '1.4.1',
     category: 'Tieto & taidot',
     subcategory: 'Nykyinen työn sisältö',
