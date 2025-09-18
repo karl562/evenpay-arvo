@@ -7,7 +7,39 @@ export const surveyQuestions: Question[] = [
     subcategory: 'Työtehtävät ja sisältö',
     type: 'text',
     required: true,
-    question: 'Kuvaile työtehtävääsi ja työpäivän / työviikon sisältöä\n\n• Mitkä ovat tärkeimmät päivittäiset ja viikottaiset tehtäväsi?\n• Onko osaamista, jota haluaisit kehittää seuraavan vuoden aikana?\n• Mitkä tehtävät vievät eniten aikaasi?\n• Mitkä tehtävät koet kaikkein merkityksellisimmiksi yhtiön kannalta?'
+    question: 'Kuvaile työtehtävääsi ja työpäivän / työviikon sisältöä'
+  },
+  {
+    id: '1.0.2',
+    category: 'Työtehtävien kuvaus',
+    subcategory: 'Päivittäiset tehtävät',
+    type: 'text',
+    required: true,
+    question: 'Mitkä ovat tärkeimmät päivittäiset ja viikottaiset tehtäväsi?'
+  },
+  {
+    id: '1.0.3',
+    category: 'Työtehtävien kuvaus',
+    subcategory: 'Osaamisen kehittäminen',
+    type: 'text',
+    required: false,
+    question: 'Onko osaamista, jota haluaisit kehittää seuraavan vuoden aikana?'
+  },
+  {
+    id: '1.0.4',
+    category: 'Työtehtävien kuvaus',
+    subcategory: 'Ajankäyttö',
+    type: 'text',
+    required: true,
+    question: 'Mitkä tehtävät vievät eniten aikaasi?'
+  },
+  {
+    id: '1.0.5',
+    category: 'Työtehtävien kuvaus',
+    subcategory: 'Merkityksellisyys',
+    type: 'text',
+    required: true,
+    question: 'Mitkä tehtävät koet kaikkein merkityksellisimmiksi yhtiön kannalta?'
   },
   // 2. Tieto & taidot
   {
