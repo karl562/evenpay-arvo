@@ -5,15 +5,13 @@ import { SurveyIntro } from './SurveyIntro';
 import { QuestionCard } from './QuestionCard';
 import { ProgressBar } from './ProgressBar';
 import { ThankYou } from './ThankYou';
-import { EvaluationResults } from './EvaluationResults';
-import { calculateEvaluation } from '@/utils/scoring';
 import { getFilteredQuestions } from '@/utils/questionUtils';
 
 interface SurveyProps {
   userInfo: UserInfo;
 }
 
-type SurveyStep = 'intro' | 'survey' | 'thankyou' | 'results';
+type SurveyStep = 'intro' | 'survey' | 'thankyou';
 
 export const Survey = ({ userInfo }: SurveyProps) => {
   const [currentStep, setCurrentStep] = useState<SurveyStep>('intro');
@@ -58,8 +56,10 @@ export const Survey = ({ userInfo }: SurveyProps) => {
     }
   };
 
-  const handleViewResults = () => {
-    setCurrentStep('results');
+  const handleEmailCopy = () => {
+    // TODO: Implement email functionality
+    console.log('Email copy requested for responses:', responses);
+    alert('Sähköpostin lähetys toteutetaan myöhemmin.');
   };
 
   const getCurrentValue = () => {
@@ -78,24 +78,12 @@ export const Survey = ({ userInfo }: SurveyProps) => {
   }
 
   if (currentStep === 'thankyou') {
-    return <ThankYou onViewResults={handleViewResults} />;
-  }
-
-  if (currentStep === 'results') {
-    const evaluation = calculateEvaluation(responses);
-    return (
-      <EvaluationResults 
-        result={evaluation} 
-        userInfo={userInfo}
-        responses={responses}
-        questions={filteredQuestions}
-      />
-    );
+    return <ThankYou onEmailCopy={handleEmailCopy} />;
   }
 
   if (currentQuestionIndex >= filteredQuestions.length) {
     setCurrentStep('thankyou');
-    return <ThankYou onViewResults={handleViewResults} />;
+    return <ThankYou onEmailCopy={handleEmailCopy} />;
   }
 
   const currentQuestion = filteredQuestions[currentQuestionIndex];

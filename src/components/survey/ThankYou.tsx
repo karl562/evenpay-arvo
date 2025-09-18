@@ -1,11 +1,11 @@
 import { Button } from '@/components/ui/button';
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, Mail } from 'lucide-react';
 
 interface ThankYouProps {
-  onViewResults: () => void;
+  onEmailCopy?: () => void;
 }
 
-export const ThankYou = ({ onViewResults }: ThankYouProps) => {
+export const ThankYou = ({ onEmailCopy }: ThankYouProps) => {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="evenpay-card max-w-2xl w-full text-center">
@@ -24,18 +24,17 @@ export const ThankYou = ({ onViewResults }: ThankYouProps) => {
           </p>
         </div>
 
-        <div className="bg-muted/30 rounded-lg p-6 mb-8">
-          <p className="text-sm text-muted-foreground mb-4">
-            Demotarkoituksessa voit tarkastella arviointituloksia:
-          </p>
-          
-          <Button
-            onClick={onViewResults}
-            className="evenpay-button-primary"
-          >
-            Näytä arvioinnin tulokset
-          </Button>
-        </div>
+        {onEmailCopy && (
+          <div className="bg-muted/30 rounded-lg p-6 mb-8">
+            <Button
+              onClick={onEmailCopy}
+              className="evenpay-button-primary flex items-center gap-2"
+            >
+              <Mail className="w-4 h-4" />
+              Lähetä kopio vastauksistani sähköpostiin
+            </Button>
+          </div>
+        )}
 
         <div className="text-xs text-muted-foreground">
           Powered by <span className="font-semibold">Evenpay</span>
