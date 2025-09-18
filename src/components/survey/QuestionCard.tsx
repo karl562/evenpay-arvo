@@ -42,18 +42,29 @@ export const QuestionCard = ({
   useEffect(() => {
     const focusInput = () => {
       if (question.type === 'text' || question.type === 'number') {
-        inputRef.current?.focus();
-      } else if (question.type === 'radio' || question.type === 'multiselect') {
-        // Focus first option for radio/checkbox questions
+        // For text inputs, use the ref
+        if (inputRef.current) {
+          inputRef.current.focus();
+        }
+      } else if (question.type === 'radio') {
+        // For radio buttons, focus the first option or selected option
+        const selectedInput = document.querySelector(`input[name="${question.id}"]:checked`) as HTMLInputElement;
         const firstInput = document.querySelector(`input[name="${question.id}"]`) as HTMLInputElement;
+        const targetInput = selectedInput || firstInput;
+        if (targetInput) {
+          targetInput.focus();
+        }
+      } else if (question.type === 'multiselect') {
+        // For checkboxes, focus the first option
+        const firstInput = document.querySelector(`input[type="checkbox"][data-question="${question.id}"]`) as HTMLInputElement;
         if (firstInput) {
           firstInput.focus();
         }
       }
     };
 
-    // Small delay to ensure DOM is updated
-    const timeoutId = setTimeout(focusInput, 100);
+    // Longer delay to ensure DOM is fully updated and rendered
+    const timeoutId = setTimeout(focusInput, 200);
     return () => clearTimeout(timeoutId);
   }, [question.id, question.type]);
 
@@ -108,17 +119,22 @@ export const QuestionCard = ({
                   checked={currentValue === option}
                   onChange={(e) => handleValueChange(e.target.value)}
                   className="sr-only"
+                  data-question={question.id}
+                  data-index={index}
                   onKeyDown={(e) => {
                     if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
                       e.preventDefault();
                       const nextIndex = (index + 1) % (question.options?.length || 1);
-                      const nextInput = e.currentTarget.parentElement?.parentElement?.children[nextIndex]?.querySelector('input') as HTMLInputElement;
+                      const nextInput = document.querySelector(`input[name="${question.id}"][data-index="${nextIndex}"]`) as HTMLInputElement;
                       nextInput?.focus();
                     } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
                       e.preventDefault();
                       const prevIndex = index === 0 ? (question.options?.length || 1) - 1 : index - 1;
-                      const prevInput = e.currentTarget.parentElement?.parentElement?.children[prevIndex]?.querySelector('input') as HTMLInputElement;
+                      const prevInput = document.querySelector(`input[name="${question.id}"][data-index="${prevIndex}"]`) as HTMLInputElement;
                       prevInput?.focus();
+                    } else if (e.key === ' ' || e.key === 'Enter') {
+                      e.preventDefault();
+                      handleValueChange(option);
                     }
                   }}
                 />
@@ -173,17 +189,26 @@ export const QuestionCard = ({
                     handleValueChange(newValue);
                   }}
                   className="sr-only"
+                  data-question={question.id}
+                  data-index={index}
                   onKeyDown={(e) => {
                     if (e.key === 'ArrowDown') {
                       e.preventDefault();
                       const nextIndex = (index + 1) % (question.options?.length || 1);
-                      const nextInput = e.currentTarget.parentElement?.parentElement?.children[nextIndex]?.querySelector('input') as HTMLInputElement;
+                      const nextInput = document.querySelector(`input[type="checkbox"][data-question="${question.id}"][data-index="${nextIndex}"]`) as HTMLInputElement;
                       nextInput?.focus();
                     } else if (e.key === 'ArrowUp') {
                       e.preventDefault();
                       const prevIndex = index === 0 ? (question.options?.length || 1) - 1 : index - 1;
-                      const prevInput = e.currentTarget.parentElement?.parentElement?.children[prevIndex]?.querySelector('input') as HTMLInputElement;
+                      const prevInput = document.querySelector(`input[type="checkbox"][data-question="${question.id}"][data-index="${prevIndex}"]`) as HTMLInputElement;
                       prevInput?.focus();
+                    } else if (e.key === ' ') {
+                      e.preventDefault();
+                      const checked = !e.currentTarget.checked;
+                      const newValue = checked
+                        ? [...(currentValue as string[]), option]
+                        : (currentValue as string[]).filter(v => v !== option);
+                      handleValueChange(newValue);
                     }
                   }}
                 />
