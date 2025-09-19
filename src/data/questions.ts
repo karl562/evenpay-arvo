@@ -151,38 +151,6 @@ export const surveyQuestions: Question[] = [
       value: 'Kyllä'
     }
   },
-  {
-    id: '1.4.1',
-    category: 'Tieto & taidot',
-    subcategory: 'Nykyinen työn sisältö',
-    type: 'text',
-    required: true,
-    question: 'Kuvaile työtehtävääsi ja työpäivän / työviikon sisältöä:'
-  },
-  {
-    id: '1.4.2',
-    category: 'Tieto & taidot',
-    subcategory: 'Nykyinen työn sisältö',
-    type: 'text',
-    required: true,
-    question: 'Mitkä ovat tärkeimmät päivittäiset ja viikoittaiset tehtäväsi?'
-  },
-  {
-    id: '1.4.3',
-    category: 'Tieto & taidot',
-    subcategory: 'Nykyinen työn sisältö',
-    type: 'text',
-    required: true,
-    question: 'Mitkä tehtävät vievät eniten aikaasi?'
-  },
-  {
-    id: '1.4.4',
-    category: 'Tieto & taidot',
-    subcategory: 'Nykyinen työn sisältö',
-    type: 'text',
-    required: true,
-    question: 'Mitkä tehtävät koet kaikkein merkityksellisimmiksi yhtiön kannalta?'
-  },
   // 2. Henkinen & fyysinen kuormitus
   {
     id: '2.1.1',
