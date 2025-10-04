@@ -33,6 +33,21 @@ export const surveyQuestions: Question[] = [
     required: true,
     question: 'Mitkä tehtävät koet kaikkein merkityksellisimmiksi yhtiön kannalta?'
   },
+  {
+    id: '1.0.6',
+    category: 'Työtehtävien kuvaus',
+    subcategory: 'Sidosryhmätyöskentely',
+    type: 'radio',
+    required: true,
+    question: 'Miten vaativaa sidosryhmätyötä rooliin kuuluu?',
+    options: [
+      'Ei sidosryhmätyötä',
+      'Vaatimatonta',
+      'Kohtuullista',
+      'Vaativaa',
+      'Erittäin vaativaa'
+    ]
+  },
   // 2. Tieto & taidot
   {
     id: '1.1.1',
@@ -308,6 +323,44 @@ export const surveyQuestions: Question[] = [
       'Kohtalaiset (vaikuttaa asiakkaisiin/tiimiin, joitakin kustannuksia)',
       'Merkittävät (suuret taloudelliset/oikeudelliset vaikutukset)',
       'Kriittiset (turvallisuus-/henkeä uhkaavat seuraukset)'
+    ]
+  },
+  {
+    id: '3.5.1',
+    category: 'Vastuut & vaikutus',
+    subcategory: 'Valvonta',
+    type: 'radio',
+    required: true,
+    question: 'Sisältääkö työ alihankinnan, laadun, lainmukaisuuden tms valvontaa?',
+    options: [
+      'Kyllä',
+      'Ei'
+    ]
+  },
+  {
+    id: '3.6.1',
+    category: 'Vastuut & vaikutus',
+    subcategory: 'Hankinta & Kilpailutusprosessit',
+    type: 'radio',
+    required: true,
+    question: 'Sisältääkö työ hankintaa tai kilpailutusprosesseja?',
+    options: [
+      'Kyllä',
+      'Ei'
+    ]
+  },
+  {
+    id: '3.7.1',
+    category: 'Vastuut & vaikutus',
+    subcategory: 'Virkavelvoitteet',
+    type: 'radio',
+    required: true,
+    question: 'Onko työ virkavelvoitteen alaista ja/tai vaatiiko se missä määrin eri lakien noudattamista',
+    options: [
+      'Ei vaadi poikkeuksellista/tietoista virkavelvoitteen alaista toimintaa',
+      'Työtehtävä edellyttää ajoittaista virkavelvoitteen alaista toimintaa (n. 1-2 krt kuukaudessa)',
+      'Työtehtävä edellyttää säännöllistä virkavelvoitteen alaista toimintaa (n. 1-2 krt viikossa)',
+      'Työtehtävä edellyttää jatkuvaa virkavelvoitteen alaista toimintaa (Useammin kuin 2 krt viikossa)'
     ]
   },
   // 4. Työolot
