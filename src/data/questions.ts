@@ -66,6 +66,18 @@ export const surveyQuestions: Question[] = [
     ]
   },
   {
+    id: '1.1.1b',
+    category: 'Tieto & taidot',
+    subcategory: 'Virallinen koulutus',
+    type: 'text',
+    required: false,
+    question: 'Mitä muuta koulutusta vaaditaan?',
+    conditionalOn: {
+      questionId: '1.1.1',
+      value: 'Muu, mikä?'
+    }
+  },
+  {
     id: '1.1.2',
     category: 'Tieto & taidot',
     subcategory: 'Virallinen koulutus',
@@ -127,7 +139,7 @@ export const surveyQuestions: Question[] = [
     required: true,
     question: 'Kuinka usein tämän roolin osaamista/tietämystä täytyy päivittää?',
     options: [
-      'Osaaminen kehittyy töytä tekemällä ja/tai toisilta oppimalla',
+      'Osaaminen kehittyy työtä tekemällä ja/tai toisilta oppimalla',
       'Harvoin (5+ vuoden välein)',
       'Satunnaisesti (2–3 vuoden välein)',
       'Säännöllisesti (vuosittain)',
