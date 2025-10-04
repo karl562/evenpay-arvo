@@ -18,14 +18,6 @@ export const surveyQuestions: Question[] = [
     question: 'Mitkä ovat tärkeimmät päivittäiset ja viikottaiset tehtäväsi?'
   },
   {
-    id: '1.0.3',
-    category: 'Työtehtävien kuvaus',
-    subcategory: 'Osaamisen kehittäminen',
-    type: 'text',
-    required: false,
-    question: 'Onko osaamista, jota haluaisit kehittää seuraavan vuoden aikana?'
-  },
-  {
     id: '1.0.4',
     category: 'Työtehtävien kuvaus',
     subcategory: 'Ajankäyttö',
@@ -50,13 +42,12 @@ export const surveyQuestions: Question[] = [
     required: true,
     question: 'Minkä tasoinen virallinen koulutus tämän roolin hoitamiseen vaaditaan?',
     options: [
-      'Ei vaadita virallista koulutusta',
-      'Peruskoulu/lukio',
-      'Ammattitutkinto tai vastaava tekninen tutkinto',
-      'Ammattikorkeakoulututkinto tai vastaava erikoiskoulutus',
-      'Kandidaatin tutkinto yleiseltä alalta',
-      'Kandidaatin tutkinto erikoisalalta',
-      'Maisterin tutkinto'
+      'Ei vaadita koulutusta',
+      'Ammatillinen perustutkinto, ammattitutkinto tai erikoisammattitutkinto',
+      'Kandidaatin tutkinto',
+      'Ammattikorkeakoulututkinto AMK',
+      'Maisterin tutkinto, YAMK',
+      'Muu, mikä?'
     ]
   },
   {
@@ -121,35 +112,12 @@ export const surveyQuestions: Question[] = [
     required: true,
     question: 'Kuinka usein tämän roolin osaamista/tietämystä täytyy päivittää?',
     options: [
+      'Osaaminen kehittyy töytä tekemällä ja/tai toisilta oppimalla',
       'Harvoin (5+ vuoden välein)',
       'Satunnaisesti (2–3 vuoden välein)',
       'Säännöllisesti (vuosittain)',
       'Jatkuvasti (kuukausittain/viikoittain tarvitaan oppimista)'
     ]
-  },
-  {
-    id: '1.3.2',
-    category: 'Tieto & taidot',
-    subcategory: 'Jatkuva oppiminen',
-    type: 'radio',
-    required: true,
-    question: 'Tarjotaanko tai vaaditaanko virallista koulutusta (kurssit, sertifikaatit)?',
-    options: [
-      'Ei',
-      'Kyllä'
-    ]
-  },
-  {
-    id: '1.3.2b',
-    category: 'Tieto & taidot',
-    subcategory: 'Jatkuva oppiminen',
-    type: 'text',
-    required: false,
-    question: 'Tarkenna, mitä koulutusta tarjotaan tai vaaditaan?:',
-    conditionalOn: {
-      questionId: '1.3.2',
-      value: 'Kyllä'
-    }
   },
   // 2. Henkinen & fyysinen kuormitus
   {
@@ -296,10 +264,11 @@ export const surveyQuestions: Question[] = [
     subcategory: 'Esihenkilötyö & johtaminen',
     type: 'radio',
     required: true,
-    question: 'Valvooko tämä rooli muita työntekijöitä?',
+    question: 'Onko työtehtävä työnjohdollinen tai esihenkilörooli?',
     options: [
       'Ei',
-      'Kyllä'
+      'Kyllä, työnjohdollinen',
+      'Kyllä, esihenkilörooli'
     ]
   },
   {
@@ -311,7 +280,7 @@ export const surveyQuestions: Question[] = [
     question: 'Kuinka monta suoraa alaista sinulla on?',
     conditionalOn: {
       questionId: '3.3.1',
-      value: 'Kyllä'
+      value: 'Kyllä, esihenkilörooli'
     }
   },
   {
@@ -320,12 +289,11 @@ export const surveyQuestions: Question[] = [
     subcategory: 'Esihenkilötyö & johtaminen',
     type: 'radio',
     required: true,
-    question: 'Kuinka monimutkainen valvottava tiimirakenne on?',
+    question: 'Kuinka monitahoinen johdettava tiimirakenne on?',
     options: [
-      'Ei valvontaa',
+      'Ei johdettavaa',
       'Yksi tiimi',
-      'Useita tiimejä/osastoja',
-      'Koko organisaation laajuinen'
+      'Useita tiimejä/osastoja'
     ]
   },
   {
@@ -351,36 +319,9 @@ export const surveyQuestions: Question[] = [
     required: true,
     question: 'Missä rooli pääasiassa suoritetaan?',
     options: [
-      'Sisätiloissa (toimisto/laboratorio)',
-      'Sekä sisä- että ulkotiloissa',
-      'Ulkona/kenttätyönä',
-      'Muualla'
-    ]
-  },
-  {
-    id: '4.1.1b',
-    category: 'Työolot',
-    subcategory: 'Työympäristön haasteet',
-    type: 'text',
-    required: false,
-    question: 'Missä muualla?',
-    conditionalOn: {
-      questionId: '4.1.1',
-      value: 'Muualla'
-    }
-  },
-  {
-    id: '4.1.2',
-    category: 'Työolot',
-    subcategory: 'Työympäristön haasteet',
-    type: 'multiselect',
-    required: false,
-    question: 'Valitse kaikki jotka kuvaavat, mitä työtehtäväsi sisältää:',
-    options: [
-      'Melualtistusta',
-      'Äärilämpötiloja',
-      'Usein matkustamista',
-      'Epäsäännöllisiä/vuorotyövuoroja'
+      'Sisätiloissa (toimisto/etätyö kotona)',
+      'Kiinteistöillä kentällä',
+      'Sisätiloissa ja kiinteistöillä kentällä'
     ]
   },
   {
@@ -423,60 +364,6 @@ export const surveyQuestions: Question[] = [
     }
   },
   {
-    id: '4.2.3',
-    category: 'Työolot',
-    subcategory: 'Fyysinen & psyykkinen kuormitus',
-    type: 'radio',
-    required: true,
-    question: 'Aiheuttaako ympäristö psyykkistä rasitusta?',
-    options: [
-      'Ei',
-      'Kyllä'
-    ]
-  },
-  {
-    id: '4.2.3b',
-    category: 'Työolot',
-    subcategory: 'Fyysinen & psyykkinen kuormitus',
-    type: 'text',
-    required: false,
-    question: 'Minkälaista psyykkistä rasitusta?',
-    conditionalOn: {
-      questionId: '4.2.3',
-      value: 'Kyllä'
-    }
-  },
-  {
-    id: '4.3.1',
-    category: 'Työolot',
-    subcategory: 'Työolosuhteiden vaihtelevuus',
-    type: 'radio',
-    required: true,
-    question: 'Kuinka vakaat työolot ovat?',
-    options: [
-      'Erittäin vakaat (sama paikka, sama aikataulu)',
-      'Satunnaisia ennakoitavia muutoksia',
-      'Säännöllisiä muutoksia, vaatii sopeutumiskykyä',
-      'Suurta vaihtelevuutta; usein ennustamatonta',
-      'Äärimmäinen vaihtelevuus (usein matkustamista, muuttuvia olosuhteita, epäsäännöllisiä työaikoja)'
-    ]
-  },
-  {
-    id: '4.4.1',
-    category: 'Työolot',
-    subcategory: 'Huippukuormitusjaksot',
-    type: 'radio',
-    required: true,
-    question: 'Kuinka usein rooli kohtaa huippukuormituksen tai korkean stressin jaksoja?',
-    options: [
-      'Ei koskaan',
-      'Harvoin (1–2 kertaa/vuosi)',
-      'Satunnaisesti (useita kertoja/vuosi)',
-      'Kuukausittain',
-      'Viikoittain tai useammin'
-    ]
-  },
-  {
     id: '4.4.2',
     category: 'Työolot',
     subcategory: 'Huippukuormitusjaksot',
@@ -490,36 +377,7 @@ export const surveyQuestions: Question[] = [
       'Yli 1 viikko'
     ]
   },
-  {
-    id: '4.5.1',
-    category: 'Työolot',
-    subcategory: 'Uupumus- ja stressiriski',
-    type: 'radio',
-    required: true,
-    question: 'Tunnistatko roolista uupumus- ja/tai stressiriskiä?',
-    options: [
-      'Ei riskiä',
-      'Matala riski',
-      'Keskisuuri riski',
-      'Suuri riski'
-    ]
-  },
-  {
-    id: '4.5.2',
-    category: 'Työolot',
-    subcategory: 'Uupumus- ja stressiriski',
-    type: 'text',
-    required: true,
-    question: 'Mitkä ovat tämän roolin suurimmat stressitekijät?'
-  },
   // 5. Työn sujuvuus & esteet
-  {
-    id: '5.1.1',
-    category: 'Työn sujuvuus & esteet',
-    type: 'text',
-    required: true,
-    question: 'Mitkä asiat helpottavat työsi tekemistä?'
-  },
   {
     id: '5.1.2',
     category: 'Työn sujuvuus & esteet',
@@ -527,11 +385,4 @@ export const surveyQuestions: Question[] = [
     required: true,
     question: 'Mitkä asiat hidastavat tai vaikeuttavat työntekoa?'
   },
-  {
-    id: '5.1.3',
-    category: 'Työn sujuvuus & esteet',
-    type: 'text',
-    required: false,
-    question: 'Onko työkaluja tai prosesseja, joita tulisi parantaa?'
-  }
 ];
