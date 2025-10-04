@@ -78,30 +78,6 @@ export const surveyQuestions: Question[] = [
     }
   },
   {
-    id: '1.1.2',
-    category: 'Tieto & taidot',
-    subcategory: 'Virallinen koulutus',
-    type: 'radio',
-    required: true,
-    question: 'Vaaditaanko tiettyjä ammatillisia lisenssejä tai sertifikaatteja?',
-    options: [
-      'Ei',
-      'Kyllä'
-    ]
-  },
-  {
-    id: '1.1.2b',
-    category: 'Tieto & taidot',
-    subcategory: 'Virallinen koulutus',
-    type: 'text',
-    required: false,
-    question: 'Luettele tarvittavat lisenssit ja/tai sertifikaatit:',
-    conditionalOn: {
-      questionId: '1.1.2',
-      value: 'Kyllä'
-    }
-  },
-  {
     id: '1.2.1',
     category: 'Tieto & taidot',
     subcategory: 'Osaamisen erikoistuminen',
