@@ -64,7 +64,7 @@ export const SurveyIntro = ({ userInfo, onStart }: SurveyIntroProps) => {
 
           <div className="text-left space-y-3 text-sm text-muted-foreground">
             <p>
-              Tämä kysely auttaa arvioimaan työtehtäväsi ja vastuualueesi IC-tasoa. 
+              Tämä kysely auttaa arvioimaan työtehtäväsi vastuu- ja vaativuustasoa. 
               Vastaukset käsitellään luottamuksellisesti.
             </p>
             <p>
