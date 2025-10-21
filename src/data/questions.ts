@@ -31,7 +31,7 @@ export const surveyQuestions: Question[] = [
     subcategory: 'Merkityksellisyys',
     type: 'text',
     required: true,
-    question: 'Mitkä tehtävät koet kaikkein merkityksellisimmiksi yhtiön kannalta?'
+    question: 'Mitkä tehtävät koet kaikkein merkityksellisimmiksi säätiön kannalta?'
   },
   {
     id: '1.0.6',
@@ -71,7 +71,7 @@ export const surveyQuestions: Question[] = [
     subcategory: 'Virallinen koulutus',
     type: 'text',
     required: false,
-    question: 'Mitä muuta koulutusta vaaditaan?',
+    question: 'Mitä muuta koulutusta tai sertifiointeja vaaditaan?',
     conditionalOn: {
       questionId: '1.1.1',
       value: 'Muu, mikä?'
@@ -85,10 +85,10 @@ export const surveyQuestions: Question[] = [
     required: true,
     question: 'Onko rooliin vaadittava asiantuntijuus yleistä vai erikoistunutta?',
     options: [
-      'Yleistä ja laajasti saatavilla',
-      'Erikoistunutta, mutta monilla ehdokkailla',
-      'Harvinaista osaamista, rajallinen ehdokaspooli',
-      'Erittäin ainutlaatuista tai niukkaa tietoa (kansallinen/globaali niukkuus)'
+      'Yleistä ja laajasti saatavilla useilla henkilöillä',
+      'Erikoistunutta, mutta useilla osaajilla tällä markkina-alueella',
+      'Harvinaista osaamista, rajallinen osaajamäärä markkina-alueella',
+      'Erittäin ainutlaatuista tai harvalla henkilöllä markkina-alueella'
     ]
   },
   {
@@ -122,7 +122,20 @@ export const surveyQuestions: Question[] = [
       'Jatkuvasti (kuukausittain/viikoittain tarvitaan oppimista)'
     ]
   },
-  // 2. Henkinen & fyysinen kuormitus
+  // 3. Henkinen & fyysinen kuormitus
+  {
+    id: '4.1.1',
+    category: 'Henkinen & fyysinen kuormitus',
+    subcategory: 'Työympäristön haasteet',
+    type: 'radio',
+    required: true,
+    question: 'Missä rooli pääasiassa suoritetaan?',
+    options: [
+      'Sisätiloissa (toimisto/etätyö kotona)',
+      'Kiinteistöillä kentällä',
+      'Sisätiloissa ja kiinteistöillä kentällä'
+    ]
+  },
   {
     id: '2.1.1',
     category: 'Henkinen & fyysinen kuormitus',
@@ -131,7 +144,7 @@ export const surveyQuestions: Question[] = [
     required: true,
     question: 'Kuinka usein tämä rooli vaatii syvää keskittymistä tai monimutkaista ongelmanratkaisua?',
     options: [
-      'Harvoin (rutiinityötä)',
+      'Harvoin (toistuvaa, rutiininomaista työtä enimmäkseen)',
       'Satunnaisesti (jonkin verran analyysia/ongelmanratkaisua)',
       'Usein (päivittäin monimutkaista analyysia)',
       'Jatkuvasti (useimmat tehtävät vaativat korkeaa keskittymistä/luovuutta)'
@@ -144,32 +157,6 @@ export const surveyQuestions: Question[] = [
     type: 'text',
     required: true,
     question: 'Anna esimerkki roolin henkisesti vaativimmasta tehtävästä:'
-  },
-  {
-    id: '2.2.1',
-    category: 'Henkinen & fyysinen kuormitus',
-    subcategory: 'Fyysinen aktiivisuus & kestävyys',
-    type: 'radio',
-    required: true,
-    question: 'Mikä on roolin pääasiallinen fyysinen vaatimus?',
-    options: [
-      'Istumatyö (pääosin istuen, vähäinen liike)',
-      'Kevyt aktiivisuus (satunnaista kävelyä/seisomista, kevyet nostot <10 kg)',
-      'Kohtalainen aktiivisuus (seisominen/kävely suurimman osan päivästä, nostot jopa 20 kg)',
-      'Fyysisesti aktiivinen suurimman osan päivästä (usein nostamista >20 kg, fyysisesti raskas työ)'
-    ]
-  },
-  {
-    id: '2.2.2',
-    category: 'Henkinen & fyysinen kuormitus',
-    subcategory: 'Fyysinen aktiivisuus & kestävyys',
-    type: 'radio',
-    required: true,
-    question: 'Sisältääkö rooli pitkiä fyysisiä jaksoja ilman lepoa?',
-    options: [
-      'Ei',
-      'Kyllä'
-    ]
   },
   {
     id: '2.3.1',
@@ -194,7 +181,55 @@ export const surveyQuestions: Question[] = [
     required: true,
     question: 'Kuvaile roolissa esiintyviä stressaavia tilanteita:'
   },
-  // 3. Vastuut & vaikutus
+  // 4. Työolot
+  {
+    id: '4.2.1',
+    category: 'Työolot',
+    subcategory: 'Fyysinen & psyykkinen kuormitus',
+    type: 'radio',
+    required: true,
+    question: 'Kuinka kuormittavaa työ normaalisti on?',
+    options: [
+      'Ei lainkaan kuormittavaa',
+      'Hieman kuormittavaa, palautuminen saman päivän aikana',
+      'Merkittävän kuormittavaa; palautuminen saman viikon aikana',
+      'Jatkuvaa kuormitusta; palautumista tarvitaan työajan ulkopuolella',
+      'Merkittävämpää kuormitusta; usein haitallisia vaikutuksia (päänsärky, unettomuus)'
+    ]
+  },
+  {
+    id: '5.1.2',
+    category: 'Työolot',
+    subcategory: 'Työn sujuvuus & esteet',
+    type: 'text',
+    required: true,
+    question: 'Mitkä asiat hidastavat tai vaikeuttavat työntekoa?'
+  },
+  {
+    id: '4.2.2',
+    category: 'Työolot',
+    subcategory: 'Fyysinen & psyykkinen kuormitus',
+    type: 'radio',
+    required: true,
+    question: 'Aiheuttaako työympäristö fyysistä rasitusta?',
+    options: [
+      'Ei',
+      'Kyllä'
+    ]
+  },
+  {
+    id: '4.2.2b',
+    category: 'Työolot',
+    subcategory: 'Fyysinen & psyykkinen kuormitus',
+    type: 'text',
+    required: false,
+    question: 'Minkälaista fyysistä rasitusta?',
+    conditionalOn: {
+      questionId: '4.2.2',
+      value: 'Kyllä'
+    }
+  },
+  // 5. Vastuut & vaikutus
   {
     id: '3.1.1',
     category: 'Vastuut & vaikutus',
@@ -238,39 +273,15 @@ export const surveyQuestions: Question[] = [
     }
   },
   {
-    id: '3.2.2',
-    category: 'Vastuut & vaikutus',
-    subcategory: 'Budjetti- ja resurssivastuu',
-    type: 'radio',
-    required: true,
-    question: 'Hallinnoidaanko roolissa materiaali-/tekniikkaresursseja (laitteet, varasto)?',
-    options: [
-      'Ei',
-      'Kyllä'
-    ]
-  },
-  {
-    id: '3.2.2b',
-    category: 'Vastuut & vaikutus',
-    subcategory: 'Budjetti- ja resurssivastuu',
-    type: 'text',
-    required: false,
-    question: 'Mitä materiaali-/tekniikkaresursseja tehtävässäsi hallinnoidaan?',
-    conditionalOn: {
-      questionId: '3.2.2',
-      value: 'Kyllä'
-    }
-  },
-  {
     id: '3.3.1',
     category: 'Vastuut & vaikutus',
     subcategory: 'Esihenkilötyö & johtaminen',
     type: 'radio',
     required: true,
-    question: 'Onko työtehtävä työnjohdollinen tai esihenkilörooli?',
+    question: 'Sisältääkö tehtävä muiden johtamista tai muiden töiden valvontaa?',
     options: [
       'Ei',
-      'Kyllä, työnjohdollinen',
+      'Kyllä, työn valvontaa',
       'Kyllä, esihenkilörooli'
     ]
   },
@@ -350,80 +361,5 @@ export const surveyQuestions: Question[] = [
       'Työtehtävä edellyttää säännöllistä virkavelvoitteen alaista toimintaa (n. 1-2 krt viikossa)',
       'Työtehtävä edellyttää jatkuvaa virkavelvoitteen alaista toimintaa (Useammin kuin 2 krt viikossa)'
     ]
-  },
-  // 4. Työolot
-  {
-    id: '4.1.1',
-    category: 'Työolot',
-    subcategory: 'Työympäristön haasteet',
-    type: 'radio',
-    required: true,
-    question: 'Missä rooli pääasiassa suoritetaan?',
-    options: [
-      'Sisätiloissa (toimisto/etätyö kotona)',
-      'Kiinteistöillä kentällä',
-      'Sisätiloissa ja kiinteistöillä kentällä'
-    ]
-  },
-  {
-    id: '4.2.1',
-    category: 'Työolot',
-    subcategory: 'Fyysinen & psyykkinen kuormitus',
-    type: 'radio',
-    required: true,
-    question: 'Kuinka kuormittavaa työ normaalisti on?',
-    options: [
-      'Ei lainkaan kuormittavaa',
-      'Hieman kuormittavaa, palautuminen saman päivän aikana',
-      'Merkittävän kuormittavaa; palautuminen saman viikon aikana',
-      'Jatkuvaa kuormitusta; palautumista tarvitaan työajan ulkopuolella',
-      'Merkittävämpää kuormitusta; usein haitallisia vaikutuksia (päänsärky, unettomuus)'
-    ]
-  },
-  {
-    id: '4.2.2',
-    category: 'Työolot',
-    subcategory: 'Fyysinen & psyykkinen kuormitus',
-    type: 'radio',
-    required: true,
-    question: 'Aiheuttaako työympäristö fyysistä rasitusta?',
-    options: [
-      'Ei',
-      'Kyllä'
-    ]
-  },
-  {
-    id: '4.2.2b',
-    category: 'Työolot',
-    subcategory: 'Fyysinen & psyykkinen kuormitus',
-    type: 'text',
-    required: false,
-    question: 'Minkälaista fyysistä rasitusta?',
-    conditionalOn: {
-      questionId: '4.2.2',
-      value: 'Kyllä'
-    }
-  },
-  {
-    id: '4.4.2',
-    category: 'Työolot',
-    subcategory: 'Huippukuormitusjaksot',
-    type: 'radio',
-    required: true,
-    question: 'Kuinka kauan huippukuormitus-, tai korkean stressin jaksot yleensä kestävät?',
-    options: [
-      '<1 päivä',
-      '2–3 päivää',
-      'Jopa 1 viikko',
-      'Yli 1 viikko'
-    ]
-  },
-  // 5. Työn sujuvuus & esteet
-  {
-    id: '5.1.2',
-    category: 'Työn sujuvuus & esteet',
-    type: 'text',
-    required: true,
-    question: 'Mitkä asiat hidastavat tai vaikeuttavat työntekoa?'
   },
 ];
