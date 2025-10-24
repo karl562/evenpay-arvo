@@ -54,13 +54,6 @@ export const SurveyIntro = ({ userInfo, onStart }: SurveyIntroProps) => {
             </div>
           </div>
 
-          {userInfo.customMessage && (
-            <div className="bg-primary/10 border border-primary/20 rounded-lg p-4">
-              <p className="text-sm text-foreground leading-relaxed">
-                {userInfo.customMessage}
-              </p>
-            </div>
-          )}
 
           <div className="text-left space-y-3 text-sm text-muted-foreground">
             <p>

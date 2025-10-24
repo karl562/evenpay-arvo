@@ -55,7 +55,7 @@ export const surveyQuestions: Question[] = [
     subcategory: 'Virallinen koulutus',
     type: 'radio',
     required: true,
-    question: 'Minkä tasoinen virallinen koulutus tämän roolin hoitamiseen vaaditaan?',
+    question: 'Minkä tasoinen koulutus luo hyvät edellytykset tehtävässä suoriutumiselle?',
     options: [
       'Ei vaadita koulutusta',
       'Ammatillinen perustutkinto, ammattitutkinto tai erikoisammattitutkinto',
@@ -86,9 +86,9 @@ export const surveyQuestions: Question[] = [
     question: 'Onko rooliin vaadittava asiantuntijuus yleistä vai erikoistunutta?',
     options: [
       'Yleistä ja laajasti saatavilla useilla henkilöillä',
-      'Erikoistunutta, mutta useilla osaajilla tällä markkina-alueella',
-      'Harvinaista osaamista, rajallinen osaajamäärä markkina-alueella',
-      'Erittäin ainutlaatuista tai harvalla henkilöllä markkina-alueella'
+      'Erikoistunutta, mutta useilla osaajilla tällä organisaation toiminta-alueella',
+      'Harvinaista osaamista, rajallinen osaajamäärä organisaation toiminta-alueella',
+      'Erittäin ainutlaatuista tai harvalla henkilöllä organisaation toiminta-alueella'
     ]
   },
   {
@@ -122,6 +122,18 @@ export const surveyQuestions: Question[] = [
       'Jatkuvasti (kuukausittain/viikoittain tarvitaan oppimista)'
     ]
   },
+  {
+    id: '1.3.1b',
+    category: 'Tieto & taidot',
+    subcategory: 'Jatkuva oppiminen',
+    type: 'text',
+    required: false,
+    question: 'Kerro millä keinoin osaamisen päivittäminen tapahtuu',
+    conditionalOn: {
+      questionId: '1.3.1',
+      value: ['Harvoin (5+ vuoden välein)', 'Satunnaisesti (2–3 vuoden välein)', 'Säännöllisesti (vuosittain)', 'Jatkuvasti (kuukausittain/viikoittain tarvitaan oppimista)']
+    }
+  },
   // 3. Henkinen & fyysinen kuormitus
   {
     id: '4.1.1',
@@ -132,8 +144,8 @@ export const surveyQuestions: Question[] = [
     question: 'Missä rooli pääasiassa suoritetaan?',
     options: [
       'Sisätiloissa (toimisto/etätyö kotona)',
-      'Kiinteistöillä kentällä',
-      'Sisätiloissa ja kiinteistöillä kentällä'
+      'Kiinteistöillä',
+      'Sisätiloissa ja kiinteistöillä'
     ]
   },
   {
@@ -278,7 +290,7 @@ export const surveyQuestions: Question[] = [
     subcategory: 'Esihenkilötyö & johtaminen',
     type: 'radio',
     required: true,
-    question: 'Sisältääkö tehtävä muiden johtamista tai muiden töiden valvontaa?',
+    question: 'Sisältääkö rooli muiden johtamista tai muiden töiden valvontaa?',
     options: [
       'Ei',
       'Kyllä, työn valvontaa',
